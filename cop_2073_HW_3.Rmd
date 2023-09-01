@@ -1,0 +1,203 @@
+---
+title: "Introduction to Data Science - HW 3"
+author: "First Name Last name - `flastname@floridapoly.edu`"
+output: html_notebook
+---
+
+
+
+# Problem 1 
+
+(a) (10 points) Define a function `imperial_to_metric` that takes in **two arguments**: a number of feet and a number of inches. The function should return the equivalent length in meters
+
+> To convert a length `L` from feet (`ft`) and inches (`inches`) to meters (`m`), one can use the relation: `L(m) = L(ft) × 0.3048 + L(inches) × 0.0254`
+
+```{r}
+imperial_to_metric <- function(ft, inches){
+  return(ft * 0.3048 + inches * 0.0254)
+}
+imperial_to_metric(1, 12)
+```
+
+
+(b) (5 points) Create a variable `height_in_meters` by passing your height in imperial to the `imperial_to_metric` function.
+
+```{r}
+height_in_meters <- imperial_to_metric(6, 1)
+height_in_meters
+```
+
+
+
+# Problem 2
+
+`R` comes with many functions that you can use to do sophisticated tasks like random sampling. For example, you can round a number with the `round()` function, or calculate its factorial with the `factorial()` function. Using a function is pretty simple. Just write the name of the function and then the data you want the function to operate on in parentheses.
+
+(a) (5 points) Find `round(3.1415)`, `factorial(12)`, `mean(1:17)`.
+
+```{r}
+round(3.1415)
+factorial(12)
+mean(1:17)
+```
+
+
+(b) (5 points) You can create an object named `die` that contains the numbers one through six:
+
+```{r}
+# Create a vector with numbers from 1 to 6
+die <- 1:6
+```
+
+You can simulate a roll of the die with `R`’s `sample()` function. `sample()` takes two arguments: a vector named `x` and a number named `size`. 
+
+Try `sample(x = die, size = 1)`. 
+
+Is there any difference if you type `sample(die, size = 1)` ? Yes
+
+
+```{r}
+sample(x = die, size = 1)
+sample(die, size = 1)
+```
+
+
+
+# Problem 3
+
+Use `R` as a calculator to compute the following values:
+
+(a) (5 points) $27 (38 -17)$
+
+(b) (5 points) $ln(14^7)$
+
+(c) (5 points) $\sqrt\frac{436}{12}$  FINISH
+
+
+```{r}
+27 * (38 - 17)
+log((14^7))
+sqrt(436/12)
+```
+FINISH
+
+
+# Problem 4
+
+Create the following vectors in `R`:
+
+$a = (5, 10, 15, 20, ..., 160)$
+
+$b = (87, 86, 85, ..., 56)$
+
+```{r}
+a <- seq(5, 160, by = 5)
+b <- seq(87, 56, by = -1)
+```
+
+(a) (5 points) Multiply these vectors and call the result `d`. 
+
+```{r}
+d <- a * b
+```
+
+
+(b) (15 points) Select subsets of `d` to identify the following.
+
+- What are the 19th, 20th, and 21st elements of `d`?
+
+- What are all of the elements of `d` which are less than 2000?
+
+- How many elements of `d` are greater than 6000?
+
+```{r}
+d[19:21]
+d[d < 2000]
+d[d > 6000]
+```
+
+
+# Problem 5
+
+Start with this vector of `nouns`.  
+
+```{r}
+nouns <- c("apple", "flower", "insect", "lettuce", "knife", "dog", "cloud", "person", "cabinet", "flower" )
+```
+
+(a) (5 points) Use the `length()` function to display the number of elements in `nouns`.
+
+```{r}
+length(nouns)
+```
+
+
+(b) (5 points) Use indexing to create a new vector consisting of the first 4 elements of `nouns`.
+
+```{r}
+nouns[1:4]
+```
+
+
+(c) (5 points) Use indexing to create a new vector consisting of only the last 8 elements of `nouns`.
+
+```{r}
+nouns_last_eight <- nouns[3:8]
+nouns_last_eight
+```
+
+
+(d) (5 points) Use indexing to create a new vector of the 1st, 3rd through 6th, and 10th elements of `nouns` (the length of the resulting vector should be 6)
+
+```{r}
+nouns_irregular <- nouns[c(1, 3, 6, 10)]
+nouns_irregular
+length(nouns_irregular)
+```
+
+
+(e) (5 points) Create a new vector with the elements of `nouns` in reverse order.
+
+```{r}
+nouns_reverse <- nouns[10:1]
+nouns_reverse
+```
+
+
+# Problem 6
+
+Consider the function `rescale01` defined as 
+
+```{r}
+rescale01 <- function(x) {
+  rng <- range(x, na.rm = TRUE, finite = TRUE)
+  (x - rng[1]) / (rng[2] - rng[1])
+}
+```
+
+(a) (5 points) Evaluate `rescale01(c(0, 5, 10))`
+
+```{r}
+rescale01(c(0, 5, 10))
+```
+
+(b) (5 points) Describe what the `rescale01` function does.
+
+The rescale01 function rescales the range to be between the values 0 and 1.
+
+(c) (5 points) What would happen if `x` contained a single missing value, and `na.rm` was `FALSE`? Show an example.
+
+```{r}
+rescale01 <- function(x) {
+  rng <- range(x, na.rm = FALSE, finite = TRUE)
+  (x - rng[1]) / (rng[2] - rng[1])
+}
+rescale01(c(1, NA, 3))
+```
+The NA values are returned
+
+> Hint: check the documentation (help page) for `range()`.
+
+
+
+
